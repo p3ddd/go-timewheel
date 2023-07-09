@@ -126,7 +126,7 @@ func (tw *TimeWheel) Start() {
 	tw.onceStart.Do(
 		func() {
 			tw.ticker = time.NewTicker(tw.tick)
-			go tw.schduler()
+			go tw.scheduler()
 			go tw.tickGenerator()
 		},
 	)
@@ -149,7 +149,7 @@ func (tw *TimeWheel) tickGenerator() {
 	}
 }
 
-func (tw *TimeWheel) schduler() {
+func (tw *TimeWheel) scheduler() {
 	queue := tw.ticker.C
 	if tw.tickQueue == nil {
 		queue = tw.tickQueue
